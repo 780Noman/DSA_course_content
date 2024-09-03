@@ -1,0 +1,146 @@
+	// umasd.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include"iostream"
+#include"conio.h"
+using namespace std;
+class emp;
+emp *start;
+class emp
+{
+private:
+	int id;
+	emp *n;
+	
+public:
+	emp(){ 
+	}
+	void end()
+	{
+		emp *t1=new emp;
+		cout<<"enter id\n";
+		cin>>t1->id;
+		t1->n=NULL;
+		if(start==NULL)
+		{
+			start=t1;
+		}
+		else
+		{
+			emp* t=new emp;
+			t=start;
+			while(t->n!=NULL)
+			{
+				t=t->n;
+			}
+			t->n=t1;
+		}
+	}
+	void  front()
+	{
+		emp *t1=new emp;
+		cout<<"enter id\n";
+		cin>>t1->id;
+		t1->n=start;
+		start=t1;
+	}
+	void display()
+	{
+		emp* t=start;
+		while(t!=NULL)
+		{
+			cout<<"id = "<<t->id<<endl;
+			t=t->n;
+
+		}
+	}
+	void delfromfront()
+	{
+		emp* temp=new emp;
+		temp=start;
+		start=start->n;
+		delete temp;
+
+
+	}
+	void delatend()
+	{
+		emp* temp=start;
+		while(temp->n->n!=NULL)
+		{
+			temp=temp->n;
+
+		}
+		temp->n=NULL;
+	}
+	void delatpos(int n)
+	{
+		emp* temp1=start;
+		emp* temp2=start;
+		if(n==1)
+		{
+			start=temp1->n;
+			delete temp1;
+		}
+		else
+		{
+			for(int j=0; j<n-2; j++)
+			{
+				temp1=temp1->n;
+				temp2=temp2->n;
+				
+
+			}
+			temp2=temp2->n;
+			temp1->n=temp2->n;
+			delete temp2;
+		}
+	}
+};
+
+void main()
+{
+	start=NULL;
+	//start=NULL;
+	//emp *start=NULL;
+	emp e;
+	char ch;
+	cout<<"press\n1 to insert at front\n2 to insert at end \n3 to display\n4 to delete from front\n5 to del at postion\n6 to del at end\n7 to end\n";
+	cin>>ch;
+	while(ch!='7')
+	{
+		switch(ch)
+		{
+		case '1':
+			e.front();
+			break;
+		case '2':
+			e.end();
+			break;
+		case '3':
+			e.display();
+			break;
+		case '4':
+			e.delfromfront();
+			break;
+		case '5':
+				int m;
+				cout<<"enter position";
+				cin>>m;
+			e.delatpos(m);
+			break;
+
+			case '6':
+				e.delatend();
+				break;
+
+		default:
+			cout<<"invalid entry";
+		}
+		cout<<"press\n1 to insert at front\n2 to insert at end \n3 to display\n4 to delete at front\n 5 to del at specifc pos\n6 to del at end\n7 to end\n";
+	cin>>ch;
+	}
+	getch();
+}
+

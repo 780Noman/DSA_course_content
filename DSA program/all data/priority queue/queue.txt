@@ -1,0 +1,107 @@
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+using namespace std;
+class student 
+{
+public:
+	int id;
+};
+
+int top=-1;
+void enqueue(student q[],int s)
+{
+	if(top==s-1)
+	{
+		cout<<"array is full";
+	}
+	else
+	{
+		top++;
+		cout<<"Enter id"<<endl;
+		cin>>q[top].id;
+		cout<<endl;
+	}
+
+	
+
+}
+void sort(student q[], int s)
+{
+	for(int i=0;i<=top;i++)
+	
+		for(int j=i+1;j<=top;j++)
+		{
+			if(q[i].id<q[j].id)
+			{
+				int temp;
+				temp=q[i].id;
+				q[i].id=q[j].id;
+				q[j].id=temp;
+			}
+		}
+
+}
+void dequeue(student q[], int s)
+{
+	if(top==-1)
+	{
+		cout<<"empty"<<endl;
+	}
+	else
+	{
+		for(int i=0;i<top;i++)
+		{
+			q[i]=q[i+1];
+		}
+		top--;
+	}
+}
+void display(student q[], int s)
+{
+	for(int i=0;i<=top;i++)
+	{
+		cout<<"ID: "<<q[i].id<<endl;
+	}
+
+}
+int main ()
+{
+	int size,a;
+	cout<<"enter size of array"<<endl;
+	cin>>size;
+	student *q=new student[size];
+	cout<<"enter 1-4"<<endl;
+	cout<<"1 for enque\n2 for dequeue\n3 for display\n4 for exit"<<endl;
+	cin>>a;
+	while(a!=4)
+	{
+		switch(a)
+		{
+		case 1:
+			enqueue(q,size);
+			sort(q,size);
+			break;
+		case 2:
+			dequeue(q,size);
+			sort(q,size);
+			break;
+		case 3:
+			display(q,size);
+			break;
+		default:
+			cout<<"invalid input "<<endl;
+		}
+cout<<"enter 1-4"<<endl;
+cout<<"1 for enque\n2 for dequeue\n3 for display\n4 for exit"<<endl;
+	cin>>a;
+	}
+	getch();
+	return 0;
+}
+
+
+
+
